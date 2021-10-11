@@ -1,0 +1,22 @@
+@startuml Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+Person(user, "User", "Usuario del sistema de Karaoke, con acceso a las canciones disponibles")
+
+System(karaoke, "Karaoke", "Permite que un usuario pueda ingresar al sistema, buscar canciones disponibles, agregar o eliminar canciones, y reproducir canciones junto a su letra para cantarla.")
+System(auth, "Sistema de Autenticación", "Sistema externo que permite la autenticacion y autorizacion de los usuarios al sistema.")
+System(cloud, "Cloud Storage", "Sistema externo que se utiliza para almacenar los archivos de las canciones disponibles en el sistema principal.")
+
+
+' scaled sprites are ok
+Rel_R(user, karaoke, "Utiliza")
+
+' scaled sprites are ok
+Rel_R(karaoke, cloud, "Utiliza")
+
+' scaled sprites are ok
+Rel_D(karaoke, auth, "Envia login de usuario")
+
+Rel_U(auth, karaoke, "Regresa Token de usuario")
+
+@enduml
